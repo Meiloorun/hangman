@@ -16,12 +16,19 @@
 	startinput:		.word 0
 
 	//program end output message
-	goodbye:		.asciz "Thanks for Playing!\n"
+	goodbye:		.asciz "Thanks for playing Hangman by Hishaam Khan (669114)!\n"
 	gblen =			.-goodbye
 
 	//startgame mesage
 	start_msg:		.asciz "Welcome to Hangman!\n"
 	start_msg_len =	.-start_msg
+
+	//words file
+	word_filename:	.asciz "words.txt"
+	word_filemode:	.asciz "r"
+
+	//words
+	words:	.space 100
 
 .global main
 
@@ -65,7 +72,21 @@ startgame:
 	ldr r2, =start_msg_len
 	mov r7, #4
 	svc #0
+	b ReadWords
 
+ReadWords:
+	@open the file
+	ldr r0, =word_filename
+	ldr r1, =word_filemode
+	bl	fopen					@openfile("words.txt", "w")
+	mov r4, r0					//save file descriptor
+
+	@read the file
+	mov r0, r4
+	mov r1, =words
+	mov r2, 
+	mov r7, #3
+	svc #0
 end:
 	mov r0, #1
 	ldr r1, =goodbye
