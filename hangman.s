@@ -27,8 +27,24 @@
 	word_filename:	.asciz "words.txt"
 	word_filemode:	.asciz "r"
 
+	//file io error
+	file_err_msg:	.asciz "File Error"
+	file_err_msg_len = .-file_err_msg
+
 	//words
 	words:	.space 100
+
+	word1:	.asciz ""
+	word2:	.asciz ""
+	word3:	.asciz ""
+	word4:	.asciz ""
+	word5:	.asciz ""
+	word6:	.asciz ""
+	word7:	.asciz ""
+	word8:	.asciz ""
+	word9:	.asciz ""
+	word10:	.asciz ""
+
 
 .global main
 
@@ -74,19 +90,38 @@ startgame:
 	svc #0
 	b ReadWords
 
-ReadWords:
+file_err:
+	mov r4, r0
+	mov r0, #1
+	ldr r1, =file_err_msg
+	ldr r2, =file_err_msg_len
+	mov r7, #4
+	svc #0
+
+ReadWords:mov
 	@open the file
-	ldr r0, =word_filename
-	ldr r1, =word_filemode
-	bl	fopen					@openfile("words.txt", "w")
+	ldr r0, =word_filename		//file descriptor
+	mov r1, #0x42
+	mov r2, #384				
+	mov r7, #5					@openfile("words.txt", "r")
+	svc 0
+
+	cmp r0, #-1
+	beq file_err
+
 	mov r4, r0					//save file descriptor
 
 	@read the file
 	mov r0, r4
-	mov r1, =words
-	mov r2, 
+	ldr r1, =words
+	mov r2, #200
 	mov r7, #3
 	svc #0
+
+	mov r5, r0					//save num of characters
+
+	
+
 end:
 	mov r0, #1
 	ldr r1, =goodbye
