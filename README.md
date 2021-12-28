@@ -1,12 +1,19 @@
 # Hangman Instructions
 
 Page changelog
+
 Date	Changes
+
 03 November	Initial version released
+
 24 November	Deadline updated
+
 22 December	Updated early feedback guidance and clarified mark breakdown for error messages (they must be descriptive, not generic, and exact error messages, which ideally should be used, still stand)
+
 Important information
+
 Academic misconduct
+
 Coursework will be routinely checked for academic misconduct. Your submission must be your own work. Please read the Student Handbook to ensure that you know what this means. Do not give your code to anyone else, either before or after the coursework deadline.
 
 Deadline and late submissions
@@ -40,6 +47,7 @@ BINARY
 INTELLIGENCE
 CARTOGRAPHERS
 CHARACTERISTICALLY
+
 A random secret word is read from the text file. Alternatively, you can list the 10 words in an array in the program (slightly less marks are given for this option) and choose a random word from the array.
 
 The player has six chances to guess the letters for each game. Valid inputs of the game are from A-Z or a-z (convert the letter into a capital if a small letter is input).
